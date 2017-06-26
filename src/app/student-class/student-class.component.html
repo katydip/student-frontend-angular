@@ -28,8 +28,8 @@
   <tbody>
     <tr *ngFor="let student_class of student_classes">
       <td>{{student_class.student_class_id}}</td>
-      <td>{{student_class.student_id}}</td>
-      <td>{{student_class.class_id}}</td>
+      <td>{{student_class.hasOwnProperty('student_id') ? student_class.student_id.last_name + ', ' + student_class.student_id.first_name : '' }}</td>
+      <td>{{student_class.hasOwnProperty('class_id') ? student_class.class_id.subject + ' - ' + student_class.class_id.course : '' }}</td>      
       <td class="text-center">
         <a class="btn btn-primary" [routerLink]="['/student-class/edit/', student_class.student_class_id]">Edit</a>&nbsp;
         <button (click)="deleteStudentClass(student_class.student_class_id)" class="btn btn-danger">Delete</button>
