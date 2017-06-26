@@ -14,6 +14,10 @@ import { HomeComponent } from './home/home.component';
 import { DataService } from './data.service';
 import { DeleteConfirmComponent } from './delete-confirm/delete-confirm.component';
 import { StudentFormComponent } from './student-form/student-form.component';
+import { GradeComponent } from './grade/grade.component';
+import { GradeFormComponent } from './grade-form/grade-form.component';
+import { MajorClassComponent } from './major-class/major-class.component';
+import { MajorClassFormComponent } from './major-class-form/major-class-form.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { StudentFormComponent } from './student-form/student-form.component';
     StudentComponent,
     HomeComponent,
     DeleteConfirmComponent,
-    StudentFormComponent
+    StudentFormComponent,
+    GradeComponent,
+    GradeFormComponent,
+    MajorClassComponent,
+    MajorClassFormComponent
   ],
   imports: [
     BrowserModule,
