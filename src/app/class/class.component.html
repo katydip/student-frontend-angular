@@ -29,7 +29,7 @@
   <tbody>
     <tr *ngFor="let class of classes">
       <td>{{class.class_id}}</td>
-      <td>{{class.instructor_id}}</td>
+      <td>{{class.hasOwnProperty('instructor_id') ? class.instructor_id.last_name + ', ' + class.instructor_id.first_name : ''}}</td>
       <td>{{class.subject}}</td>
       <td>{{class.course}}</td>
       <td class="text-center">
