@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, Input }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 
@@ -16,6 +16,7 @@ export class AssignmentFormComponent implements OnInit {
   errorMessage: string;
 
   assignment: object = {};
+  grade: object;
 
   getRecordForEdit(){
     this.route.params
@@ -30,6 +31,7 @@ export class AssignmentFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.getGrades()
     this.route.params
       .subscribe((params: Params) => {
         (+params['id']) ? this.getRecordForEdit() : null;
@@ -53,5 +55,29 @@ export class AssignmentFormComponent implements OnInit {
     this.assignment = {};
     
   }
+
+  // I added this...
+
+  @Input() assignments;
+
+  getGrades(){
+    this.dataService.getRecords("grade")
+    .subscribe(
+        grade => {
+          this.grade = grade;  
+        },
+        error =>  {
+          this.errorMessage = <any>error; 
+          console.log(this.errorMessage)
+        }
+    );
+  }
+
+  compareGradeId(m1, m2){
+    if (m1 != undefined && m2 != undefined) {
+      return m1.grade_id === m2.grade_id;
+    }
+  }
+
 
 }
