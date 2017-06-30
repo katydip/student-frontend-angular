@@ -85,7 +85,6 @@ getClasses(){
     .subscribe(
         classObj => {
           this.classObj = classObj;  
-          console.log(this.classObj)
         },
         error =>  {
           this.errorMessage = <any>error; 
