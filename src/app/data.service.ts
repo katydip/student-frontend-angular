@@ -36,11 +36,21 @@ export class DataService {
 
     editRecord(endpoint: string, record:object, id:number): Observable<object> {
         let apiUrl = `${this.baseUrl}${endpoint}/${id}`;
-        console.log(record)
+        // console.log(record)
         console.log(apiUrl)
+        this.clean(record)
+        // console.log(record)
         return this.http.put(apiUrl, record)
             .map(this.extractData)
             .catch(this.handleError);
+    }
+
+    clean(obj) {
+        for (var propName in obj) {
+            if (obj[propName] === '') {
+                obj[propName] = null;
+            }
+        }
     }
 
     addRecord(endpoint: string, record:object): Observable<object> {
