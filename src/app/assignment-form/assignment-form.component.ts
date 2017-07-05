@@ -17,6 +17,10 @@ export class AssignmentFormComponent implements OnInit {
 
   assignment: object = {};
   grade: object;
+  student: object;
+  classObj: object;
+
+
 
   getRecordForEdit(){
     this.route.params
@@ -31,7 +35,10 @@ export class AssignmentFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getGrades()
+    this.getGrades();
+    this.getStudents();
+    this.getClasses();
+
     this.route.params
       .subscribe((params: Params) => {
         (+params['id']) ? this.getRecordForEdit() : null;
@@ -59,6 +66,9 @@ export class AssignmentFormComponent implements OnInit {
   // I added this...
 
   @Input() assignments;
+  @Input() classes;
+  @Input() students;
+
 
   getGrades(){
     this.dataService.getRecords("grade")
@@ -78,6 +88,44 @@ export class AssignmentFormComponent implements OnInit {
       return m1.grade_id === m2.grade_id;
     }
   }
+ getStudents(){
+    this.dataService.getRecords("student")
+    .subscribe(
+        student => {
+          this.student = student;  
+        },
+        error =>  {
+          this.errorMessage = <any>error; 
+          console.log(this.errorMessage)
+        }
+    );
+  }
+
+compareStudentId(m1, m2){
+    if (m1 != undefined && m2 != undefined) {
+      return m1.student_id === m2.student_id;
+    }
+  }
+getClasses(){
+    this.dataService.getRecords("class")
+    .subscribe(
+        classObj => {
+          this.classObj = classObj;  
+        },
+        error =>  {
+          this.errorMessage = <any>error; 
+          console.log(this.errorMessage)
+        }
+    );
+  }
+
+compareClassId(m1, m2){
+    if (m1 != undefined && m2 != undefined) {
+      return m1.class_id === m2.class_id;
+    }
+  }
+
+
 
 
 }
