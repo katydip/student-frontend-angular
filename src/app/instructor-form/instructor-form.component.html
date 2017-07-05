@@ -31,12 +31,25 @@
       <input [(ngModel)]="instructor.last_name" type="text" class="form-control" id="last_name" name="last_name"  placeholder="Last Name" required>
     </div>
   </div>
+  
   <div class="form-group">
+    <label for="major_id" class="col-sm-2 control-label">Major</label>
+    <div class="col-sm-10">
+      <select class="form-control" [compareWith]="compareMajorId" [(ngModel)]="instructor.major_id" id="major_id" name="major_id">
+        <option *ngFor="let major of major" [ngValue]= "major">{{major.major}}</option>
+      </select>
+    </div>
+      <!--https://stackoverflow.com/questions/39501595/angular-2-select-option-dropdown-how-to-get-the-value-on-change-so-it-can-be-->
+      <!--https://angular.io/api/forms/SelectControlValueAccessor-->
+  </div>
+
+  <!--<div class="form-group">
     <label for="major_id" class="col-sm-2 control-label">Major</label>
     <div class="col-sm-10">
       <input [(ngModel)]="instructor.major_id" type="text" class="form-control" id="major_id" name="major_id" placeholder="Major ID" required>
     </div>
-  </div>
+  </div>-->
+
   <div class="form-group">
     <label for="years_of_experience" class="col-sm-2 control-label">Years of Experience</label>
     <div class="col-sm-10">

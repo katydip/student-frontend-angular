@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 
@@ -10,12 +10,15 @@ import { DataService } from '../data.service'
   templateUrl: './instructor-form.component.html',
   styleUrls: ['./instructor-form.component.css']
 })
+
 export class InstructorFormComponent implements OnInit {
 
   successMessage: string;
   errorMessage: string;
-
   instructor: object = {};
+
+  major: object;
+  
 
   getRecordForEdit(){
     this.route.params
@@ -30,6 +33,7 @@ export class InstructorFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getMajors();
     this.route.params
       .subscribe((params: Params) => {
         (+params['id']) ? this.getRecordForEdit() : null;
@@ -51,6 +55,27 @@ export class InstructorFormComponent implements OnInit {
 
     this.instructor = {};
     
+  }
+
+  @Input() majors;
+
+  getMajors(){
+    this.dataService.getRecords("major")
+    .subscribe(
+        major => {
+          this.major = major;  
+        },
+        error =>  {
+          this.errorMessage = <any>error; 
+          console.log(this.errorMessage)
+        }
+    );
+  }
+
+  compareMajorId(m1, m2){
+    if (m1 != undefined && m2 != undefined) {
+      return m1.major_id === m2.major_id;
+    }
   }
 
 }
