@@ -24,9 +24,12 @@
   <div class="form-group">
     <label for="major_id" class="col-sm-2 control-label">Major ID</label>
     <div class="col-sm-10">
-      <select class="form-control" [compareWith]="compareMajorId" [(ngModel)]="major_class.major_id" id="major_id" name="major_id">
+      <select class="form-control" [compareWith]="compareMajorId" [(ngModel)]="major_class.major_id" id="major_id" name="major_id" required>
         <option *ngFor="let major of major" [ngValue]= "major">{{major.major}}</option>
       </select>
+      <span *ngIf="formErrors.major_id" class="text-danger">
+        {{ formErrors.major_id }}
+      </span>
     </div>
       <!--https://stackoverflow.com/questions/39501595/angular-2-select-option-dropdown-how-to-get-the-value-on-change-so-it-can-be-->
       <!--https://angular.io/api/forms/SelectControlValueAccessor-->
@@ -43,9 +46,12 @@
   <div class="form-group">
     <label for="class_id" class="col-sm-2 control-label">Class ID</label>
     <div class="col-sm-10">
-      <select class="form-control" [compareWith]="compareClassId" [(ngModel)]="major_class.class_id" id="class_id" name="class_id">
+      <select class="form-control" [compareWith]="compareClassId" [(ngModel)]="major_class.class_id" id="class_id" name="class_id" required>
         <option *ngFor="let classObj of classObj" [ngValue]= "classObj">{{classObj.subject}} - {{classObj.course}}</option>
       </select>
+      <span *ngIf="formErrors.class_id" class="text-danger">
+        {{ formErrors.class_id }}
+      </span>
     </div>
       <!--https://stackoverflow.com/questions/39501595/angular-2-select-option-dropdown-how-to-get-the-value-on-change-so-it-can-be-->
       <!--https://angular.io/api/forms/SelectControlValueAccessor-->
@@ -60,7 +66,7 @@
 
    <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button [disabled]="!majorClassForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
     </div>
   </div>
   

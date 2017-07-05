@@ -59,6 +59,7 @@ export class StudentClassFormComponent implements OnInit {
     }
 
     this.student_class = {};
+    this.studentClassForm.reset();
     
   }
 
@@ -133,16 +134,16 @@ compareStudentId(m1, m2){
   }
 
   formErrors = {
-    'first_name': '',
-    'last_name': '',
+    'student_id': '',
+    'class_id': '',
   };
 
   validationMessages = {
-    'first_name': {
-      'required': 'First name is required.'
+    'student_id': {
+      'required': 'Student is required.'
     },
-    'last_name': {
-      'required': 'Last name is required.'
+    'class_id': {
+      'required': 'Class is required.'
     }
   };
 
