@@ -20,20 +20,43 @@
 <form (ngSubmit)="saveMajorClass(major_class.major_class_id)"  #majorClassForm="ngForm" class="form-horizontal">
   
   <input [(ngModel)]="major_class.major_class_id" #major_class_id="ngModel" type="hidden" name="major_class_id">
-  
+
   <div class="form-group">
+    <label for="major_id" class="col-sm-2 control-label">Major ID</label>
+    <div class="col-sm-10">
+      <select class="form-control" [compareWith]="compareMajorId" [(ngModel)]="major_class.major_id" id="major_id" name="major_id">
+        <option *ngFor="let major of major" [ngValue]= "major">{{major.major}}</option>
+      </select>
+    </div>
+      <!--https://stackoverflow.com/questions/39501595/angular-2-select-option-dropdown-how-to-get-the-value-on-change-so-it-can-be-->
+      <!--https://angular.io/api/forms/SelectControlValueAccessor-->
+  </div>
+
+
+  <!--<div class="form-group">
     <label for="major_id" class="col-sm-2 control-label">Major ID</label>
     <div class="col-sm-10">
       <input [(ngModel)]="major_class.major_id" #major_id="ngModel" type="text" class="form-control" id="major_id" name="major_id" placeholder="Major ID" required>
     </div>
-  </div>
+  </div>-->
 
+  <div class="form-group">
+    <label for="class_id" class="col-sm-2 control-label">Class ID</label>
+    <div class="col-sm-10">
+      <select class="form-control" [compareWith]="compareClassId" [(ngModel)]="major_class.class_id" id="class_id" name="class_id">
+        <option *ngFor="let classObj of classObj" [ngValue]= "classObj">{{classObj.subject}} - {{classObj.course}}</option>
+      </select>
+    </div>
+      <!--https://stackoverflow.com/questions/39501595/angular-2-select-option-dropdown-how-to-get-the-value-on-change-so-it-can-be-->
+      <!--https://angular.io/api/forms/SelectControlValueAccessor-->
+  </div>
+<!--
   <div class="form-group">
     <label for="class_id" class="col-sm-2 control-label">Class ID</label>
     <div class="col-sm-10">
       <input [(ngModel)]="major_class.class_id" #class_id="ngModel" type="text" class="form-control" id="class_id" name="class_id" placeholder="Class ID" required>
     </div>
-  </div>
+  </div>-->
 
    <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
@@ -42,3 +65,4 @@
   </div>
   
 </form>
+

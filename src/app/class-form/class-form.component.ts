@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, Input }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 
@@ -16,6 +16,7 @@ export class ClassFormComponent implements OnInit {
   errorMessage: string;
 
   class: object = {};
+  instructor: object;
 
   getRecordForEdit(){
     this.route.params
@@ -30,6 +31,7 @@ export class ClassFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.getInstructor();
     this.route.params
       .subscribe((params: Params) => {
         (+params['id']) ? this.getRecordForEdit() : null;
@@ -53,5 +55,27 @@ export class ClassFormComponent implements OnInit {
     this.class = {};
     
   }
+
+@Input() instructors;
+
+getInstructor(){
+    this.dataService.getRecords("instructor")
+    .subscribe(
+        instructor => {
+          this.instructor = instructor;  
+        },
+        error =>  {
+          this.errorMessage = <any>error; 
+          console.log(this.errorMessage)
+        }
+    );
+  }
+
+compareInstructorId(m1, m2){
+    if (m1 != undefined && m2 != undefined) {
+      return m1.instructor_id === m2.instructor_id;
+    }
+  }
+
 
 }

@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 
@@ -16,6 +16,9 @@ export class StudentClassFormComponent implements OnInit {
   errorMessage: string;
 
   student_class: object = {};
+  classObj: object;
+  student: object;
+
 
   getRecordForEdit(){
     this.route.params
@@ -30,6 +33,8 @@ export class StudentClassFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.getClasses();
+    this.getStudents();
     this.route.params
       .subscribe((params: Params) => {
         (+params['id']) ? this.getRecordForEdit() : null;
@@ -52,5 +57,47 @@ export class StudentClassFormComponent implements OnInit {
     this.student_class = {};
     
   }
+
+@Input() classes;
+@Input() students;
+
+getClasses(){
+    this.dataService.getRecords("class")
+    .subscribe(
+        classObj => {
+          this.classObj = classObj;  
+        },
+        error =>  {
+          this.errorMessage = <any>error; 
+          console.log(this.errorMessage)
+        }
+    );
+  }
+
+compareClassId(m1, m2){
+    if (m1 != undefined && m2 != undefined) {
+      return m1.class_id === m2.class_id;
+    }
+  }
+
+getStudents(){
+    this.dataService.getRecords("student")
+    .subscribe(
+        student => {
+          this.student = student;  
+        },
+        error =>  {
+          this.errorMessage = <any>error; 
+          console.log(this.errorMessage)
+        }
+    );
+  }
+
+compareStudentId(m1, m2){
+    if (m1 != undefined && m2 != undefined) {
+      return m1.student_id === m2.student_id;
+    }
+  }
+
 
 }

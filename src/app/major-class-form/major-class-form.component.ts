@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit }      from '@angular/core';
+import { Component, OnInit, Input }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 
@@ -16,6 +16,8 @@ export class MajorClassFormComponent implements OnInit {
   errorMessage: string;
 
   major_class: object = {};
+  major: object;
+  classObj: object;
 
   getRecordForEdit(){
     this.route.params
@@ -30,6 +32,8 @@ export class MajorClassFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.getMajors();
+    this.getClasses();
     this.route.params
       .subscribe((params: Params) => {
         (+params['id']) ? this.getRecordForEdit() : null;
@@ -52,6 +56,47 @@ export class MajorClassFormComponent implements OnInit {
 
     this.major_class = {};
     
+  }
+
+  @Input() majors;
+  @Input() classes;
+
+  getMajors(){
+    this.dataService.getRecords("major")
+    .subscribe(
+        major => {
+          this.major = major;  
+        },
+        error =>  {
+          this.errorMessage = <any>error; 
+          console.log(this.errorMessage)
+        }
+    );
+  }
+
+compareMajorId(m1, m2){
+    if (m1 != undefined && m2 != undefined) {
+      return m1.major_id === m2.major_id;
+    }
+  }
+
+getClasses(){
+    this.dataService.getRecords("class")
+    .subscribe(
+        classObj => {
+          this.classObj = classObj;  
+        },
+        error =>  {
+          this.errorMessage = <any>error; 
+          console.log(this.errorMessage)
+        }
+    );
+  }
+
+compareClassId(m1, m2){
+    if (m1 != undefined && m2 != undefined) {
+      return m1.class_id === m2.class_id;
+    }
   }
 
 }
