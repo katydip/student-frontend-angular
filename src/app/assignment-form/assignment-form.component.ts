@@ -68,6 +68,8 @@ export class AssignmentFormComponent implements OnInit {
   @Input() assignments;
   @Input() classes;
   @Input() students;
+  @Input() grades;
+
 
 
   getGrades(){
