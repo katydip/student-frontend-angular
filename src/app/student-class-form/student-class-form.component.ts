@@ -1,7 +1,8 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Location }               from '@angular/common';
+import { Location } from '@angular/common';
+import { NgForm } from '@angular/forms';
 
 import { DataService } from '../data.service'
 
@@ -11,6 +12,9 @@ import { DataService } from '../data.service'
   styleUrls: ['./student-class-form.component.css']
 })
 export class StudentClassFormComponent implements OnInit {
+
+  studentClassForm: NgForm;
+  @ViewChild('studentClassForm') currentForm: NgForm;
 
   successMessage: string;
   errorMessage: string;
@@ -99,5 +103,47 @@ compareStudentId(m1, m2){
     }
   }
 
+  ngAfterViewChecked() {
+    this.formChanged();
+  }
+
+  formChanged() {
+    this.studentClassForm = this.currentForm;
+    this.studentClassForm.valueChanges
+      .subscribe(
+        data => this.onValueChanged(data)
+      );
+  }
+
+  onValueChanged(data?: any) {
+    let form = this.studentClassForm.form;
+
+    for (let field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
+  formErrors = {
+    'first_name': '',
+    'last_name': '',
+  };
+
+  validationMessages = {
+    'first_name': {
+      'required': 'First name is required.'
+    },
+    'last_name': {
+      'required': 'Last name is required.'
+    }
+  };
 
 }
