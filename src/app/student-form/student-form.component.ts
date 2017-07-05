@@ -16,6 +16,7 @@ export class StudentFormComponent implements OnInit {
   studentForm: NgForm;
   @ViewChild('studentForm') currentForm: NgForm;
 
+  
   successMessage: string;
   errorMessage: string;
 
@@ -82,6 +83,8 @@ compareMajorId(m1, m2){
       return m1.major_id === m2.major_id;
     }
   }
+
+
 
   ngAfterViewChecked() {
     this.formChanged();

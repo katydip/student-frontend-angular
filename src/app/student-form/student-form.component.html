@@ -23,7 +23,7 @@
     <label for="first_name" class="col-sm-2 control-label">First Name</label>
     <div class="col-sm-10">
       <input [(ngModel)]="student.first_name" #first_name="ngModel" type="text" class="form-control" id="first_name" name="first_name" placeholder="First Name" required minlength="2" maxlength="30">
-      <span *ngIf="formErrors.first_name" class="text-danger">
+         <span *ngIf="formErrors.first_name" class="text-danger">
           {{ formErrors.first_name }}
         </span>
     </div>
@@ -32,7 +32,7 @@
     <label for="last_name" class="col-sm-2 control-label">Last Name</label>
     <div class="col-sm-10">
       <input [(ngModel)]="student.last_name" type="text" class="form-control" id="last_name" name="last_name"  placeholder="Last Name" required minlength="2" maxlength="30">
-      <span *ngIf="formErrors.last_name" class="text-danger">
+        <span *ngIf="formErrors.last_name" class="text-danger">
           {{ formErrors.last_name }}
         </span>
     </div>
@@ -41,7 +41,7 @@
     <label for="start_date" class="col-sm-2 control-label">Start Date</label>
     <div class="col-sm-10">
       <input [(ngModel)]="student.start_date" type="date" class="form-control" id="start_date" name="start_date" placeholder="2017-01-01" pattern="(\d{4})-(\d{2})-(\d{2})">
-      <span *ngIf="formErrors.start_date" class="text-danger">
+         <span *ngIf="formErrors.start_date" class="text-danger">
           {{ formErrors.start_date }}
         </span>
     </div>
@@ -49,8 +49,8 @@
   <div class="form-group">
     <label for="gpa" class="col-sm-2 control-label">GPA</label>
     <div class="col-sm-10">
-      <input [(ngModel)]="student.gpa" type="text" class="form-control" id="gpa" name="gpa" placeholder="4.0" pattern="\d+\.\d+">
-      <span *ngIf="formErrors.gpa" class="text-danger">
+      <input [(ngModel)]="student.gpa" type="text" class="form-control" id="gpa" name="gpa" placeholder="4.0" pattern="(?:\d*\.)?\d+">
+       <span *ngIf="formErrors.gpa" class="text-danger">
           {{ formErrors.gpa }}
         </span>
     </div>
@@ -61,7 +61,7 @@
       <input [(ngModel)]="student.sat" type="text" class="form-control" id="sat" name="sat" placeholder="1400" pattern="([4-8][0-9]{2}|9[0-8][0-9]|99[0-9]|1[0-5][0-9]{2}|1600)" maxlength="4">
       <span *ngIf="formErrors.sat" class="text-danger">
           {{ formErrors.sat }}
-        </span>
+      </span>
     </div>
   </div>
   <div class="form-group">
@@ -76,7 +76,7 @@
   </div>
    <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button [disabled]="!studentForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+        <button [disabled]="!studentForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
     </div>
   </div>
 </form>
