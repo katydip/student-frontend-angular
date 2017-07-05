@@ -1,7 +1,7 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Location } from '@angular/common';
+import { Location }               from '@angular/common';
 import { NgForm } from '@angular/forms';
 
 import { DataService } from '../data.service'
@@ -16,6 +16,7 @@ export class StudentFormComponent implements OnInit {
   studentForm: NgForm;
   @ViewChild('studentForm') currentForm: NgForm;
 
+  
   successMessage: string;
   errorMessage: string;
 
@@ -58,6 +59,7 @@ export class StudentFormComponent implements OnInit {
 
     this.student = {};
     this.studentForm.reset();
+    
   }
 // i added this... 
 
@@ -82,9 +84,9 @@ compareMajorId(m1, m2){
     }
   }
 
-//Form validation
 
-ngAfterViewChecked() {
+
+  ngAfterViewChecked() {
     this.formChanged();
   }
 
