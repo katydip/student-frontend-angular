@@ -1,8 +1,8 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit, Input }      from '@angular/core';
+import { Component, OnInit, Input, ViewChild }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
-
+import { NgForm } from '@angular/forms';
 import { DataService } from '../data.service'
 
 @Component({
@@ -11,6 +11,9 @@ import { DataService } from '../data.service'
   styleUrls: ['./class-form.component.css']
 })
 export class ClassFormComponent implements OnInit {
+
+classForm: NgForm;
+  @ViewChild('classForm') currentForm: NgForm;
 
   successMessage: string;
   errorMessage: string;
@@ -53,6 +56,7 @@ export class ClassFormComponent implements OnInit {
     }
 
     this.class = {};
+    this.classForm.reset();
     
   }
 
@@ -77,5 +81,58 @@ compareInstructorId(m1, m2){
     }
   }
 
+ ngAfterViewChecked() {
+    this.formChanged();
+  }
+
+
+ formChanged() {
+    this.classForm = this.currentForm;
+    this.classForm.valueChanges
+      .subscribe(
+        data => this.onValueChanged(data)
+      );
+  }
+
+  onValueChanged(data?: any) {
+    let form = this.classForm.form;
+
+    for (let field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
+  formErrors = {
+    'instructor_id': '',
+    'subject': '',
+    'course': '',
+  };
+
+  validationMessages = {
+  'instructor_id': {
+     'required': 'Instructor is required.',
+     'minlength': 'First name must be at least 2 characters long.',
+     'maxlength': 'First name cannot be more than 30 characters long.'
+   },
+    'subject': {
+      'required': 'Subject is required.',
+      'minlength': 'Subject must be at least 2 characters long.',
+      'maxlength': 'Subject cannot be more than 30 characters long.'
+    },
+    'course': {
+      'required': 'Course is required',
+      'maxlength': 'Course cannot be more than 3 characters long.'
+    },
+  
+  };
 
 }
