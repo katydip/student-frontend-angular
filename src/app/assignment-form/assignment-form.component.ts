@@ -1,7 +1,8 @@
 import 'rxjs/add/operator/switchMap';
-import { Component, OnInit, Input }      from '@angular/core';
+import { Component, OnInit, Input, ViewChild }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
+import { NgForm } from '@angular/forms';
 
 import { DataService } from '../data.service'
 
@@ -11,6 +12,10 @@ import { DataService } from '../data.service'
   styleUrls: ['./assignment-form.component.css']
 })
 export class AssignmentFormComponent implements OnInit {
+
+  assignmentForm: NgForm;
+  @ViewChild('assignmentForm') currentForm: NgForm;
+
 
   successMessage: string;
   errorMessage: string;
@@ -60,6 +65,7 @@ export class AssignmentFormComponent implements OnInit {
     }
 
     this.assignment = {};
+    this.assignmentForm.reset();
     
   }
 
@@ -127,7 +133,65 @@ compareClassId(m1, m2){
     }
   }
 
+  ngAfterViewChecked() {
+    this.formChanged();
+  }
 
+  formChanged() {
+    this.assignmentForm = this.currentForm;
+    this.assignmentForm.valueChanges
+      .subscribe(
+        data => this.onValueChanged(data)
+      );
+  }
 
+  onValueChanged(data?: any) {
+    let form = this.assignmentForm.form;
+
+    for (let field in this.formErrors) {
+      // clear previous error message (if any)
+      this.formErrors[field] = '';
+      const control = form.get(field);
+
+      if (control && control.dirty && !control.valid) {
+        const messages = this.validationMessages[field];
+        for (const key in control.errors) {
+          this.formErrors[field] += messages[key] + ' ';
+        }
+      }
+    }
+  }
+
+  formErrors = {
+    'student': '',
+    'assignment_nbr': '',
+    'grade': '',
+    'class': ''
+  };
+
+  validationMessages = {
+    'student': {
+      'required': 'Please select student.'
+    },
+    // 'last_name': {
+    //   'required': 'Last name is required.',
+    //   'minlength': 'Last name must be at least 2 characters long.',
+    //   'maxlength': 'Last name cannot be more than 30 characters long.'
+    // },
+    // 'sat': {
+    //   'pattern': 'Sat score must be between 400 and 1600',
+    //   'maxlength': 'Sat cannot be more than 4 characters long.'
+    // },
+    // 'start_date': {
+    //   'pattern': 'Start date should be in the following format: YYYY-MM-DD'
+    // },
+    // 'gpa': {
+    //   'pattern': 'GPA must be a decimal'
+    // }
+  };
 
 }
+
+
+
+
