@@ -3,13 +3,16 @@ import { Component, OnInit, Input, ViewChild }      from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 import { NgForm } from '@angular/forms';
+import { fadeInAnimation } from '../animations/animations';
 
 import { DataService } from '../data.service'
 
 @Component({
   selector: 'app-student-form',
   templateUrl: './student-form.component.html',
-  styleUrls: ['./student-form.component.css']
+  styleUrls: ['./student-form.component.css'],
+  animations: [fadeInAnimation],
+
 })
 export class StudentFormComponent implements OnInit {
 
