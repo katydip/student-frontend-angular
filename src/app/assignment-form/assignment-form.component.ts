@@ -166,28 +166,23 @@ compareClassId(m1, m2){
     'student': '',
     'assignment_nbr': '',
     'grade': '',
-    'class': ''
+    'classObj': ''
   };
 
   validationMessages = {
     'student': {
       'required': 'Please select student.'
     },
-    // 'last_name': {
-    //   'required': 'Last name is required.',
-    //   'minlength': 'Last name must be at least 2 characters long.',
-    //   'maxlength': 'Last name cannot be more than 30 characters long.'
-    // },
-    // 'sat': {
-    //   'pattern': 'Sat score must be between 400 and 1600',
-    //   'maxlength': 'Sat cannot be more than 4 characters long.'
-    // },
-    // 'start_date': {
-    //   'pattern': 'Start date should be in the following format: YYYY-MM-DD'
-    // },
-    // 'gpa': {
-    //   'pattern': 'GPA must be a decimal'
-    // }
+    'assignment_nbr': {
+      'required': 'Provide assignment number.'
+    },
+    'grade': {
+      'required': 'Select a grade.'
+     
+    },
+    'classObj': {
+      'required': 'Select a class.'
+    }
   };
 
 }
