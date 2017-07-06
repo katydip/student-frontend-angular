@@ -4,11 +4,15 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { DataService } from '../data.service'
+import { fadeInAnimation } from '../animations/animations';
+
 
 @Component({
   selector: 'app-class-form',
   templateUrl: './class-form.component.html',
-  styleUrls: ['./class-form.component.css']
+  styleUrls: ['./class-form.component.css'],
+  animations: [fadeInAnimation]
+
 })
 export class ClassFormComponent implements OnInit {
 
