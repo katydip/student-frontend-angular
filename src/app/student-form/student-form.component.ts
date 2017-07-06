@@ -135,8 +135,8 @@ compareMajorId(m1, m2){
       'maxlength': 'Last name cannot be more than 30 characters long.'
     },
     'sat': {
-      'pattern': 'Sat score must be between 400 and 1600',
-      'maxlength': 'Sat cannot be more than 4 characters long.'
+      'pattern': 'SAT score must be between 400 and 1600',
+      'maxlength': 'SAT cannot be more than 4 characters long.'
     },
     'start_date': {
       'pattern': 'Start date should be in the following format: YYYY-MM-DD'
