@@ -2,6 +2,7 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 body {
     padding-top: 70px;
+    background-color: black;
 }
 
 table {

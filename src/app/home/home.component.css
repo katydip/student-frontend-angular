@@ -1,0 +1,20 @@
+.jumbotron {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  background-image: url("../../assets/images/jmu1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: white;
+  font-size: 48px;
+  font-style: bold;
+  text-align: center;
+}
+
+
+img {
+    width: 150px;
+    height: 150px;
+    padding-top: 20px;
+}
